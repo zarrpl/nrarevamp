@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xyra Official | Student Programmer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --whatsapp: #25D366;
+            --youtube: #FF0000;
+            --telegram: #0088cc;
+            --neon-effect: 0 0 10px rgba(108, 92, 231, 0.8), 0 0 20px rgba(108, 92, 231, 0.6), 0 0 30px rgba(108, 92, 231, 0.4);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: var(--opacity); }
+        }
+        
+        .profile-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: transform 0.5s;
+        }
+        
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                transparent 0%,
+                rgba(108, 92, 231, 0.1) 50%,
+                transparent 100%
+            );
+            transform: rotate(30deg);
+            z-index: -1;
+            animation: shine 6s infinite linear;
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(30deg) translate(-30%, -30%); }
+            100% { transform: rotate(30deg) translate(30%, 30%); }
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .profile-img-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 25px;
+            border-radius: 50%;
+            padding: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: var(--neon-effect);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px rgba(108, 92, 231, 0.8), 0 0 20px rgba(108, 92, 231, 0.6), 0 0 30px rgba(108, 92, 231, 0.4); }
+            100% { box-shadow: 0 0 15px rgba(108, 92, 231, 0.9), 0 0 30px rgba(108, 92, 231, 0.7), 0 0 45px rgba(108, 92, 231, 0.5); }
+        }
+        
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1a1a2e;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+        
+        .profile-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .profile-name::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .profile-title {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: none;
+        }
+        
+        .social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+            z-index: -1;
+        }
+        
+        .social-link:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .social-link:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .social-link i {
+            margin-right: 12px;
+            font-size: 22px;
+            transition: transform 0.3s;
+        }
+        
+        .social-link:hover i {
+            transform: scale(1.2);
+        }
+        
+        .whatsapp {
+            background-color: var(--whatsapp);
+        }
+        
+        .whatsapp-group {
+            background-color: #128C7E;
+        }
+        
+        .whatsapp-channel {
+            background-color: #075E54;
+        }
+        
+        .youtube {
+            background-color: var(--youtube);
+        }
+        
+        .telegram {
+            background-color: var(--telegram);
+        }
+        
+        .floating-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            opacity: 0.1;
+            font-size: 24px;
+            animation: float linear infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
+        }
+        
+        @media (max-width: 480px) {
+            .profile-card {
+                padding: 30px 20px;
+            }
+            
+            .profile-img-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .profile-name {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="floating-icons" id="floating-icons"></div>
+    
+    <div class="profile-card">
+        <div class="profile-img-container">
+            <img src="https://img1.pixhost.to/images/5937/602678966_skyzopedia.jpg" alt="Zarrel Official" class="profile-img">
+        </div>
+        
+        <h1 class="profile-name">Nara Revamp</h1>
+        <p class="profile-title">Editing & TopUp</p>
+        
+        <div class="social-links">
+            <a href="https://wa.me/83861088041" class="social-link whatsapp" target="_blank">
+                <i class="fab fa-whatsapp"></i> WhatsApp Pribadi
+            </a>
+            
+            <a href="https://chat.whatsapp.com/" class="social-link whatsapp-group" target="_blank">
+                <i class="fab fa-whatsapp"></i> Grup WhatsApp
+            </a>
+            
+            <a href="https://whatsapp.com/channel/0029Vb1xRK7ATRSf1BGtnO0R" class="social-link whatsapp-channel" target="_blank">
+                <i class="fab fa-whatsapp"></i> Channel WhatsApp
+            </a>
+            
+            <a href="https://youtube.com/@" class="social-link youtube" target="_blank">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+            
+            <a href="https://t.me/ZarrelL1" class="social-link telegram" target="_blank">
+                <i class="fab fa-telegram"></i> Telegram
+            </a>
+        </div>
+    </div>
+    
+    <script>
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.width = `${Math.random() * 3 + 1}px`;
+            star.style.height = star.style.width;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.setProperty('--duration', `${Math.random() * 3 + 2}s`);
+            star.style.setProperty('--opacity', Math.random() * 0.5 + 0.1);
+            starsContainer.appendChild(star);
+        }
+        
+        const iconsContainer = document.getElementById('floating-icons');
+        const icons = ['fa-code', 'fa-laptop-code', 'fa-microchip', 'fa-server', 'fa-database', 
+                      'fa-robot', 'fa-gamepad', 'fa-mobile-screen', 'fa-globe', 'fa-cloud'];
+        
+        for (let i = 0; i < 15; i++) {
+            const icon = document.createElement('i');
+            icon.classList.add('floating-icon', 'fas', icons[Math.floor(Math.random() * icons.length)]);
+            icon.style.left = `${Math.random() * 100}%`;
+            icon.style.top = `${Math.random() * 100 + 100}%`;
+            icon.style.fontSize = `${Math.random() * 20 + 10}px`;
+            icon.style.animationDuration = `${Math.random() * 30 + 20}s`;
+            icon.style.animationDelay = `${Math.random() * 5}s`;
+            iconsContainer.appendChild(icon);
+        }
+        
+        const profileCard = document.querySelector('.profile-card');
+        profileCard.addEventListener('mousemove', (e) => {
+            const x = e.clientX - profileCard.getBoundingClientRect().left;
+            const y = e.clientY - profileCard.getBoundingClientRect().top;
+            
+            const centerX = profileCard.offsetWidth / 2;
+            const centerY = profileCard.offsetHeight / 2;
+            
+            const angleX = (y - centerY) / 20;
+            const angleY = (centerX - x) / 20;
+            
+            profileCard.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+        });
+        
+        profileCard.addEventListener('mouseleave', () => {
+            profileCard.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+        });
+    </script>
+</body>
+  </html>
